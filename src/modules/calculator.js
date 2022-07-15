@@ -26,6 +26,14 @@ const isOperator = (target) => {
     return false
 }
 
+const getLast = () => {
+    if (stack.length == 0) {
+        return "Empty"
+    } else {
+        return stack[stack.length - 1]
+    }
+}
+
 const calculateRpn = (input) => {
     const tempStack = [...stack]
     // if command > 2 after trim // throw error
@@ -34,10 +42,18 @@ const calculateRpn = (input) => {
     for (let i = 0; (i < cmdAry.length && !error); i++) {
         if (isOperator(cmdAry[i])) {
             // if stack < 2 // throw error
-            var num2 = tempStack.pop()
-            var num1 = tempStack.pop()
-            // do math, then push
-            tempStack.push(doMath(num1, num2, cmdAry[i]))
+            if (tempStack.length >= 2) {
+                var num2 = tempStack.pop()
+                var num1 = tempStack.pop()
+                // do math, then push
+                tempStack.push(doMath(num1, num2, cmdAry[i]))
+            } else {
+                return {
+                    hasError: true,
+                    data: stack,
+                    message: 'Not enough digits in stack'
+                }
+            }
         } else {
             // if not a number, ignore return nan as error
             const c = +cmdAry[i]
@@ -49,13 +65,24 @@ const calculateRpn = (input) => {
         }
     }
     if (error) {
-        return NaN
-    }
-    if (tempStack.length == 0) {
-        return "Empty"
+        return {
+            hasError: true,
+            data: stack,
+            message: "Contains an invalid character"
+        }
     }
     stack = tempStack
-    return stack[stack.length - 1]
+    if (tempStack.length == 0) {
+        return {
+            hasError: false,
+            data: stack,
+            message: "Empty"
+        }
+    }
+    return {
+        hasError: false,
+        data: stack
+    }
 }
 
 const getStack = () => {
@@ -64,3 +91,4 @@ const getStack = () => {
 
 exports.calc = calculateRpn
 exports.getStack = getStack
+exports.getLast = getLast

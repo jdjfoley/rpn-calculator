@@ -1,8 +1,18 @@
 const { exit } = require('process')
-var { calc, getStack } = require('../calculator')
 
+const standard = (calculator) => {
 
-const standard = () => {
+    // move to config file at some point
+    // or use logger library instead of print
+    const printDebug = false 
+    const print = (message, isDebug) => {
+        if (isDebug && printDebug) {
+            console.log(`[Debug-Standard] ${message}`)
+        } else if (!isDebug) {
+            console.log(`${message}`)
+        }
+    }
+
     // default input
     var readline = require('readline')
     var rl = readline.createInterface({
@@ -11,19 +21,24 @@ const standard = () => {
         prompt: '> ',
         terminal: false
     })
-
+    print(`calc: ${calculator.calc != null}`, true)
+    print(`getLast: ${calculator.getLast != null}`, true)
     rl.prompt()
     rl.on('line', function (line) {
-        if (line === 'q') {
+        print(`input line: "${line}"`, true)
+        if (!calculator.calc || !calculator.getLast) {
+            print("Invalid calculator: Missing calc() or getLast() function")
             exit(1)
-        } else if (line === 's') {
-            console.log(getStack())
+        } else if (line === 'q') {
+            exit(1)
+        } else if (line === 's' && calculator.getStack) {
+            print(calculator.getStack())
         } else {
-            const test = calc(line.trim())
-            if(isNaN(test)) {
-                console.log("Woops! the input provided: ("+line+") contains an invalid character. Stack reverted.")
+            const result = calculator.calc(line.trim())
+            if (result.hasError) {
+                print(`Woops! "${line}": ${result.message}. Stack reverted.`)
             }
-            console.log(test);    
+            print(calculator.getLast());
         }
         rl.prompt()
     })
