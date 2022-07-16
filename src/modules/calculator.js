@@ -46,7 +46,15 @@ const calculateRpn = (input) => {
                 var num2 = tempStack.pop()
                 var num1 = tempStack.pop()
                 // do math, then push
-                tempStack.push(doMath(num1, num2, cmdAry[i]))
+                const mathResult = doMath(num1, num2, cmdAry[i])
+                if(isNaN(mathResult)) {
+                    return {
+                        hasError: true,
+                        data: stack,
+                        message: 'Operator not implemented'
+                    }
+                }
+                tempStack.push(mathResult)
             } else {
                 return {
                     hasError: true,
