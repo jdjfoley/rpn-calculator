@@ -30,8 +30,16 @@ test('Eval multi line 4 4 3 + then 1 2 * - then *', () => {
     expect(finalresponse.data[0]).toBe(20)
 })
 
-test('Handle Error 12 3 %', () => {
+test('Has Error 12 3 %', () => {
     expect(calc('12 3 %').hasError).toBe(true)
+})
+
+test('Has Error 1 2 + +', () => {
+    expect(calc('1 2 + +').hasError).toBe(true)
+})
+
+test('Has Error 1 2 a +', () => {
+    expect(calc('1 2 + +').hasError).toBe(true)
 })
 
 test('Get Last', () => {
