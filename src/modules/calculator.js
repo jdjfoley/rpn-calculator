@@ -97,6 +97,11 @@ const getStack = () => {
     return stack
 }
 
+const clearStack = () => {
+    stack = []
+}
+
 exports.calc = calculateRpn
 exports.getStack = getStack
 exports.getLast = getLast
+exports.clearStack = clearStack
