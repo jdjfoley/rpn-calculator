@@ -36,8 +36,8 @@ const getLast = () => {
 
 const calculateRpn = (input) => {
     const tempStack = [...stack]
-    // if command > 2 after trim // throw error
-    const cmdAry = input.split(" ")
+    //filter blanks due to split around empty strings
+    const cmdAry = input.split(" ").filter(num => num.length > 0)
     let error = false
     for (let i = 0; (i < cmdAry.length && !error); i++) {
         if (isOperator(cmdAry[i])) {
