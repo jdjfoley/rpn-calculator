@@ -1,15 +1,18 @@
 //TODO: arguments that determine input type (default is stdin/out)
 
-const { standard } = require("./modules/input/standard")
+const { initCalcReader, startCalcReader } = require("./modules/calcReader")
 var { calc, getStack, getLast } = require('./modules/calculator')
 
 const app = () => {
     //TODO: arguments that determine input type (default is stdin/out)
-    standard({
+    //TODO: pass arguments into calcReader { input: 'file', output: 'stdout'}
+    initCalcReader({
         calc,
         getStack,
         getLast,
     })
+    startCalcReader()
+
 }
 
 exports.app = app

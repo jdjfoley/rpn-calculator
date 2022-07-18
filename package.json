@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node .",
-    "test": "jest"
+    "test": "jest",
+    "test-watch": "jest --watch --verbose=false --silent=false"
   },
   "author": "jdjfoley@gmail.com",
   "license": "MIT",

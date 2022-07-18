@@ -26,6 +26,7 @@ const isOperator = (target) => {
     return false
 }
 
+// get last value in stack
 const getLast = () => {
     if (stack.length == 0) {
         return "Empty"
@@ -47,7 +48,7 @@ const calculateRpn = (input) => {
                 var num1 = tempStack.pop()
                 // do math, then push
                 const mathResult = doMath(num1, num2, cmdAry[i])
-                if(isNaN(mathResult)) {
+                if (isNaN(mathResult)) {
                     return {
                         hasError: true,
                         data: stack,

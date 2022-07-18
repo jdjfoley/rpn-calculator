@@ -1,4 +1,4 @@
-const {calc, getStack, getLast, clearStack} = require('./calculator')
+const { calc, getStack, getLast, clearStack } = require('./calculator')
 beforeEach(() => {
     clearStack()
 })
@@ -48,8 +48,8 @@ test('Get Last', () => {
 })
 
 test('Get Stack', () => {
-    calc('1 2 4 5')
-    expect(getStack()).toStrictEqual([1,2,4,5])
+    calc('1.5 2 4.1 5')
+    expect(getStack()).toStrictEqual([1.5, 2, 4.1, 5])
 })
 
 test('Ignore extra spaces', () => {
