@@ -12,7 +12,7 @@ const doMath = (num1f, num2f, operator) => {
         return (num1 - num2)/10000
     } else if (operator === '*') {
         return (num1 * num2)/100000000
-    } else if (operator === '/') {
+    } else if (operator === '/' && num2 !== 0) {
         return num1 / num2
     }
     return NaN
@@ -54,7 +54,7 @@ const calculateRpn = (input) => {
                     return {
                         hasError: true,
                         data: stack,
-                        message: 'Operator not implemented'
+                        message: 'Calculation Not Supported'
                     }
                 }
                 tempStack.push(mathResult)
