@@ -3,13 +3,15 @@ let stack = []
 
 // helpers
 // accept 2 numbers and an operator and fulfill the logic
-const doMath = (num1, num2, operator) => {
+const doMath = (num1f, num2f, operator) => {
+    const num1 = parseInt(num1f*10000)
+    const num2 = parseInt(num2f*10000)
     if (operator === '+') {
-        return num1 + num2
+        return (num1 + num2)/10000
     } else if (operator === '-') {
-        return num1 - num2
+        return (num1 - num2)/10000
     } else if (operator === '*') {
-        return num1 * num2
+        return (num1 * num2)/100000000
     } else if (operator === '/') {
         return num1 / num2
     }
